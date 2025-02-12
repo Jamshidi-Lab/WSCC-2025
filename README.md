@@ -9,7 +9,7 @@ The repository is organized into the following directories:
 - **Guide Directory** – Contains the installation manual and test scripts to verify ORCA, Python, and Jupyter.
 - **Lectures Documentation** – Includes winter school lecture materials and valuable resources from previous winter schools of computational chemistry.
 - **Computational Exercises** – Directory for ORCA jobs and interactive Python notebooks related to computational exercises at the school.
-- **Theoretical Exercises** – Directory for ORCA jobs and interactive Python notebooks related to theoretical exercises at the school.
+- **Theoretical Exercises** – Theoretical exercises directory.
 
 The directory names are self-explanatory, and each contains the necessary documentation to guide users
 
