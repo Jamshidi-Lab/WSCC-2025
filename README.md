@@ -17,7 +17,7 @@ The directory names are self-explanatory, and each contains the necessary docume
 
 1. Clone this repository to your local machine:
    ```bash
-   git clone https://github.com/t-c-c-w/wscc-2025.git
+   git clone https://github.com/Jamshidi-Lab/WSCC-2025.git
    cd winter-school-chemistry
    ```
 2. Follow the **Installation Manual** to set up your environment.
