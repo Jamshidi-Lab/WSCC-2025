@@ -1,0 +1,1 @@
+This directory contains theoretical exercises from the 5th WSCC.

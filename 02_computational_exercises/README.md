@@ -1,0 +1,1 @@
+This directory contains computational exercises from the 5th WSCC.

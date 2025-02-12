@@ -1,0 +1,1 @@
+This directory contains the lecture documentation presented at the 5th WSCC + lecture documentation from previous winter schools of computational chemistry.

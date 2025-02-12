@@ -6,12 +6,12 @@ Welcome to the official repository for the **Fifth Winter School of Computationa
 
 The repository is organized into the following directories:
 
-- **Installation Manual** – Step-by-step instructions for setting up the required computational chemistry tools.
-- **ORCA Jobs** – Sample ORCA input files and example calculations used in computational exercises throughout the winter school.
-- **Python Scripts** – Helpful Python utilities for data analysis, workflow automation, and computational exercises.
-- **Test Suite** – A set of tests to verify the successful installation of required software on your system.
+- **Guide Directory** – Contains the installation manual and test scripts to verify ORCA, Python, and Jupyter.
+- **Lectures Documentation** – Includes winter school lecture materials and valuable resources from previous winter schools of computational chemistry.
+- **Computational Exercises** – Directory for ORCA jobs and interactive Python notebooks related to computational exercises at the school.
+- **Theoretical Exercises** – Directory for ORCA jobs and interactive Python notebooks related to theoretical exercises at the school.
 
-The directory names are self-explanatory, and each contains the necessary documentation to guide users.
+The directory names are self-explanatory, and each contains the necessary documentation to guide users
 
 ## Getting Started
 
