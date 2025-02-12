@@ -21,9 +21,9 @@ The directory names are self-explanatory, and each contains the necessary docume
    cd winter-school-chemistry
    ```
 2. Follow the **Installation Manual** to set up your environment.
-3. Use the **ORCA Jobs** and **Python Scripts** for computational exercises.
-4. Run the **Test Suite** to ensure all required software is installed correctly.
-
+3. Run the **Test Suite** to ensure all required software is installed correctly.
+4. Use the **ORCA Jobs** and **Jupyter Notebooks** for computational exercises.
+5. 
 ## Support
 
 If you encounter any issues or have questions, feel free to reach out via:
