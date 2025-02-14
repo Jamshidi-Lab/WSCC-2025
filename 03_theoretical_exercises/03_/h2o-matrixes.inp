@@ -1,0 +1,26 @@
+
+
+
+!HF STO-3G UseSym
+
+%output
+   Print[P_Overlap] 1
+   Print[P_OneElec] 1
+   Print[P_Density] 1
+   Print[P_Fockian] 1
+   Print[P_Iter_F]  1
+   Print[P_Iter_C]  1
+   Print[P_S12]     1
+   Print[P_GuessOrb]  1
+   Print[P_MOs]  1
+   Print[P_Iter_P]  1
+end
+
+* xyz 0 1
+H          0.63109       -0.02651        0.47485
+O          0.14793        0.02998       -0.34219
+H         -0.77901       -0.00348       -0.13266
+*
+
+
+
