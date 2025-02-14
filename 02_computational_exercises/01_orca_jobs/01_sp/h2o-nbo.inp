@@ -1,0 +1,28 @@
+
+
+
+#My first orca run:)
+!HF 6-31G TightSCF Mulliken Loewdin Mayer ReducedPOP NBO
+
+%scf 
+    Print[P_SCFMemInfo] 1
+	
+end
+
+* xyz 0 1
+H          0.63109       -0.02651        0.47485
+O          0.14793        0.02998       -0.34219
+H         -0.77901       -0.00348       -0.13266
+*
+
+
+
+
+
+
+
+
+
+
+
+
