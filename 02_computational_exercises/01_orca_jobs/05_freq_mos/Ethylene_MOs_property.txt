@@ -1,0 +1,78 @@
+-------------------------------------------------------------
+----------------------- !PROPERTIES! ------------------------
+-------------------------------------------------------------
+# -----------------------------------------------------------
+$ SCF_Energy
+   description: The SCF energy
+   geom. index: 1
+   prop. index: 1
+        SCF Energy:      -78.4735344976
+# -----------------------------------------------------------
+$ DFT_Energy
+   description: The DFT energy
+   geom. index: 1
+   prop. index: 1
+   Number of Alpha Electrons         7.9999974749 
+   Number of Alpha Electrons         7.9999974749 
+   Total nuber of  Electrons        15.9999949497 
+   Exchange energy                  -9.2762720876 
+   Correlation energy               -0.5904547807 
+   Correlantion energy NL            0.0000000000 
+   Exchange-Correlation energy      -9.8667268683 
+   Embedding correction              0.0000000000 
+# -----------------------------------------------------------
+$ Calculation_Info
+   description: Details of the calculation
+   geom. index: 1
+   prop. index: 1
+     Multiplicity:                          1
+     Charge:                                0
+     number of atoms:                       6
+     number of electrons:                   0
+     number of frozen core electrons:       1
+     number of correlated electrons:        0
+     number of basis functions:             48
+     number of aux C basis functions:       0
+     number of aux J basis functions:       142
+     number of aux JK basis functions:      0
+     number of aux CABS basis functions:    0
+     Total Energy                           -78.473534
+# -----------------------------------------------------------
+$ SCF_Electric_Properties
+   description: The SCF Calculated Electric Properties
+   geom. index: 1
+   prop. index: 1
+       Filename                          : Ethylene_MOs.scfp 
+       Do Dipole Moment Calculation      : true 
+       Do Quadrupole Moment Calculation  : false 
+       Do Polarizability Calculation     : false 
+** Dipole moment part of electric properties **
+        Magnitude of dipole moment (Debye) :        0.0000023014
+        Electronic Contribution:
+                  0    
+      0      -0.000001
+      1       0.000001
+      2       0.000012
+        Nuclear Contribution:
+                  0    
+      0       0.000001
+      1      -0.000001
+      2      -0.000012
+        Total Dipole moment:
+                  0    
+      0      -0.000000
+      1       0.000000
+      2      -0.000001
+# -------------------------------------------------------------
+----------------------- !GEOMETRIES! ------------------------
+# -------------------------------------------------------------
+------------------------ !GEOMETRY! -------------------------
+    Number of atoms:    6 
+    Geometry Index:     1 
+    Coordinates:
+               0 H      1.147635380327    0.067878679448    1.044018715009
+               1 C      0.663492682581   -0.004434123670    0.064489213749
+               2 H      1.326095855596   -0.084700731897   -0.803659268993
+               3 C     -0.663492970511    0.004434463474   -0.064484079097
+               4 H     -1.326107606971    0.084700548818    0.803653979586
+               5 H     -1.147623341022   -0.067878836174   -1.044018560255
