@@ -1,0 +1,84 @@
+-------------------------------------------------------------
+----------------------- !PROPERTIES! ------------------------
+-------------------------------------------------------------
+# -----------------------------------------------------------
+$ SCF_Energy
+   description: The SCF energy
+   geom. index: 1
+   prop. index: 1
+        SCF Energy:      -74.9605586003
+# -----------------------------------------------------------
+$ Mayer_Pop
+   description: The Mayer population analysis
+   geom. index: 1
+   prop. index: 1
+     Number of atoms                     : 3
+     Threshold for printing              : 0.1000000
+     Number of bond orders printed       : 2
+  NA   - Mulliken gross atomic population
+  ZA   - Total nuclear charge
+  QA   - Mulliken gross atomic charge
+  VA   - Mayer's total valence
+  BVA  - Mayer's bonded valence
+  FA   - Mayer's free valence
+  ATOM       NA         ZA         QA         VA         BVA        FA
+  0   0     0.8111     1.0000     0.1889     0.9643     0.9643     0.0000
+  1   0     8.3777     8.0000    -0.3777     1.8988     1.8988    -0.0000
+  2   0     0.8111     1.0000     0.1889     0.9643     0.9643     0.0000
+      Bond orders larger than 0.1000000
+           Atom A     A.N. of A          Atom B    A.N. of B              Bond order
+                0             1               1            8                0.949383
+                1             8               2            1                0.949383
+# -----------------------------------------------------------
+$ Calculation_Info
+   description: Details of the calculation
+   geom. index: 1
+   prop. index: 1
+     Multiplicity:                          1
+     Charge:                                0
+     number of atoms:                       3
+     number of electrons:                   0
+     number of frozen core electrons:       1
+     number of correlated electrons:        0
+     number of basis functions:             7
+     number of aux C basis functions:       0
+     number of aux J basis functions:       0
+     number of aux JK basis functions:      0
+     number of aux CABS basis functions:    0
+     Total Energy                           -74.960559
+# -----------------------------------------------------------
+$ SCF_Electric_Properties
+   description: The SCF Calculated Electric Properties
+   geom. index: 1
+   prop. index: 1
+       Filename                          : h2o-matrixes.scfp 
+       Do Dipole Moment Calculation      : true 
+       Do Quadrupole Moment Calculation  : false 
+       Do Polarizability Calculation     : false 
+** Dipole moment part of electric properties **
+        Magnitude of dipole moment (Debye) :        1.7124922606
+        Electronic Contribution:
+                  0    
+      0       0.000000
+      1       0.000000
+      2      -0.260174
+        Nuclear Contribution:
+                  0    
+      0       0.000000
+      1       0.000000
+      2       0.933906
+        Total Dipole moment:
+                  0    
+      0       0.000000
+      1       0.000000
+      2       0.673733
+# -------------------------------------------------------------
+----------------------- !GEOMETRIES! ------------------------
+# -------------------------------------------------------------
+------------------------ !GEOMETRY! -------------------------
+    Number of atoms:    3 
+    Geometry Index:     1 
+    Coordinates:
+               0 H      0.767785906186    0.000000000000    0.498219060842
+               1 O      0.000000000000    0.000000000000   -0.062779525386
+               2 H     -0.767785906186    0.000000000000    0.498219060842
