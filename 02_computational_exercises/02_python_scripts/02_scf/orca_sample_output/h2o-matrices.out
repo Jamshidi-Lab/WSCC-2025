@@ -1,0 +1,1244 @@
+
+                                 *****************
+                                 * O   R   C   A *
+                                 *****************
+
+                                            #,                                       
+                                            ###                                      
+                                            ####                                     
+                                            #####                                    
+                                            ######                                   
+                                           ########,                                 
+                                     ,,################,,,,,                         
+                               ,,#################################,,                 
+                          ,,##########################################,,             
+                       ,#########################################, ''#####,          
+                    ,#############################################,,   '####,        
+                  ,##################################################,,,,####,       
+                ,###########''''           ''''###############################       
+              ,#####''   ,,,,##########,,,,          '''####'''          '####       
+            ,##' ,,,,###########################,,,                        '##       
+           ' ,,###''''                  '''############,,,                           
+         ,,##''                                '''############,,,,        ,,,,,,###''
+      ,#''                                            '''#######################'''  
+     '                                                          ''''####''''         
+             ,#######,   #######,   ,#######,      ##                                
+            ,#'     '#,  ##    ##  ,#'     '#,    #''#        ######   ,####,        
+            ##       ##  ##   ,#'  ##            #'  '#       #        #'  '#        
+            ##       ##  #######   ##           ,######,      #####,   #    #        
+            '#,     ,#'  ##    ##  '#,     ,#' ,#      #,         ##   #,  ,#        
+             '#######'   ##     ##  '#######'  #'      '#     #####' # '####'        
+
+
+
+                  #######################################################
+                  #                        -***-                        #
+                  #          Department of theory and spectroscopy      #
+                  #    Directorship and core code : Frank Neese         #
+                  #        Max Planck Institute fuer Kohlenforschung    #
+                  #                Kaiser Wilhelm Platz 1               #
+                  #                 D-45470 Muelheim/Ruhr               #
+                  #                      Germany                        #
+                  #                                                     #
+                  #                  All rights reserved                #
+                  #                        -***-                        #
+                  #######################################################
+
+
+
+                         Program Version 5.0.4 -  RELEASE  -
+
+ With contributions from (in alphabetic order):
+   Daniel Aravena         : Magnetic Suceptibility
+   Michael Atanasov       : Ab Initio Ligand Field Theory (pilot matlab implementation)
+   Alexander A. Auer      : GIAO ZORA, VPT2 properties, NMR spectrum
+   Ute Becker             : Parallelization
+   Giovanni Bistoni       : ED, misc. LED, open-shell LED, HFLD
+   Martin Brehm           : Molecular dynamics
+   Dmytro Bykov           : SCF Hessian
+   Vijay G. Chilkuri      : MRCI spin determinant printing, contributions to CSF-ICE
+   Dipayan Datta          : RHF DLPNO-CCSD density
+   Achintya Kumar Dutta   : EOM-CC, STEOM-CC
+   Dmitry Ganyushin       : Spin-Orbit,Spin-Spin,Magnetic field MRCI
+   Miquel Garcia          : C-PCM and meta-GGA Hessian, CC/C-PCM, Gaussian charge scheme
+   Yang Guo               : DLPNO-NEVPT2, F12-NEVPT2, CIM, IAO-localization
+   Andreas Hansen         : Spin unrestricted coupled pair/coupled cluster methods
+   Benjamin Helmich-Paris : MC-RPA, TRAH-SCF, COSX integrals
+   Lee Huntington         : MR-EOM, pCC
+   Robert Izsak           : Overlap fitted RIJCOSX, COSX-SCS-MP3, EOM
+   Marcus Kettner         : VPT2
+   Christian Kollmar      : KDIIS, OOCD, Brueckner-CCSD(T), CCSD density, CASPT2, CASPT2-K
+   Simone Kossmann        : Meta GGA functionals, TD-DFT gradient, OOMP2, MP2 Hessian
+   Martin Krupicka        : Initial AUTO-CI
+   Lucas Lang             : DCDCAS
+   Marvin Lechner         : AUTO-CI (C++ implementation), FIC-MRCC
+   Dagmar Lenk            : GEPOL surface, SMD
+   Dimitrios Liakos       : Extrapolation schemes; Compound Job, initial MDCI parallelization
+   Dimitrios Manganas     : Further ROCIS development; embedding schemes
+   Dimitrios Pantazis     : SARC Basis sets
+   Anastasios Papadopoulos: AUTO-CI, single reference methods and gradients
+   Taras Petrenko         : DFT Hessian,TD-DFT gradient, ASA, ECA, R-Raman, ABS, FL, XAS/XES, NRVS
+   Peter Pinski           : DLPNO-MP2, DLPNO-MP2 Gradient
+   Christoph Reimann      : Effective Core Potentials
+   Marius Retegan         : Local ZFS, SOC
+   Christoph Riplinger    : Optimizer, TS searches, QM/MM, DLPNO-CCSD(T), (RO)-DLPNO pert. Triples
+   Tobias Risthaus        : Range-separated hybrids, TD-DFT gradient, RPA, STAB
+   Michael Roemelt        : Original ROCIS implementation
+   Masaaki Saitow         : Open-shell DLPNO-CCSD energy and density
+   Barbara Sandhoefer     : DKH picture change effects
+   Avijit Sen             : IP-ROCIS
+   Kantharuban Sivalingam : CASSCF convergence, NEVPT2, FIC-MRCI
+   Bernardo de Souza      : ESD, SOC TD-DFT
+   Georgi Stoychev        : AutoAux, RI-MP2 NMR, DLPNO-MP2 response
+   Willem Van den Heuvel  : Paramagnetic NMR
+   Boris Wezisla          : Elementary symmetry handling
+   Frank Wennmohs         : Technical directorship
+
+
+ We gratefully acknowledge several colleagues who have allowed us to
+ interface, adapt or use parts of their codes:
+   Stefan Grimme, W. Hujo, H. Kruse, P. Pracht,  : VdW corrections, initial TS optimization,
+                  C. Bannwarth, S. Ehlert          DFT functionals, gCP, sTDA/sTD-DF
+   Ed Valeev, F. Pavosevic, A. Kumar             : LibInt (2-el integral package), F12 methods
+   Garnet Chan, S. Sharma, J. Yang, R. Olivares  : DMRG
+   Ulf Ekstrom                                   : XCFun DFT Library
+   Mihaly Kallay                                 : mrcc  (arbitrary order and MRCC methods)
+   Jiri Pittner, Ondrej Demel                    : Mk-CCSD
+   Frank Weinhold                                : gennbo (NPA and NBO analysis)
+   Christopher J. Cramer and Donald G. Truhlar   : smd solvation model
+   Lars Goerigk                                  : TD-DFT with DH, B97 family of functionals
+   V. Asgeirsson, H. Jonsson                     : NEB implementation
+   FAccTs GmbH                                   : IRC, NEB, NEB-TS, DLPNO-Multilevel, CI-OPT
+                                                   MM, QMMM, 2- and 3-layer-ONIOM, Crystal-QMMM,
+                                                   LR-CPCM, SF, NACMEs, symmetry and pop. for TD-DFT,
+                                                   nearIR, NL-DFT gradient (VV10), updates on ESD,
+                                                   ML-optimized integration grids
+   S Lehtola, MJT Oliveira, MAL Marques          : LibXC Library
+   Liviu Ungur et al                             : ANISO software
+
+
+ Your calculation uses the libint2 library for the computation of 2-el integrals
+ For citations please refer to: http://libint.valeyev.net
+
+ Your ORCA version has been built with support for libXC version: 5.1.0
+ For citations please refer to: https://tddft.org/programs/libxc/
+
+ This ORCA versions uses:
+   CBLAS   interface :  Fast vector & matrix operations
+   LAPACKE interface :  Fast linear algebra routines
+   Shared memory     :  Shared parallel matrices
+
+
+================================================================================
+
+----- Orbital basis set information -----
+Your calculation utilizes the basis: STO-3G
+   H-Ne       : W. J. Hehre, R. F. Stewart and J. A. Pople, J. Chem. Phys. 2657 (1969).
+   Na-Ar      : W. J. Hehre, R. Ditchfield, R. F. Stewart and J. A. Pople, J. Chem. Phys. 2769 (1970).
+   K,Ca,Ga-Kr : W. J. Pietro, B. A. Levy, W. J. Hehre and R. F. Stewart, J. Am. Chem. Soc. 19, 2225 (1980).
+   Sc-Zn,Y-Cd : W. J. Pietro and W. J. Hehre, J. Comp. Chem. 4, 241 (1983).
+
+================================================================================
+                                        WARNINGS
+                       Please study these warnings very carefully!
+================================================================================
+
+
+INFO   : the flag for use of the SHARK integral package has been found!
+
+================================================================================
+                                       INPUT FILE
+================================================================================
+NAME = h2o-matrixes.inp
+|  1> 
+|  2> 
+|  3> 
+|  4> !HF STO-3G UseSym
+|  5> 
+|  6> %output
+|  7>    Print[P_Overlap] 1
+|  8>    Print[P_OneElec] 1
+|  9>    Print[P_Density] 1
+| 10>    Print[P_Fockian] 1
+| 11>    Print[P_Iter_F]  1
+| 12>    Print[P_Iter_C]  1
+| 13>    Print[P_S12]     1
+| 14>    Print[P_GuessOrb]  1
+| 15>    Print[P_MOs]  1
+| 16>    Print[P_Iter_P]  1
+| 17> end
+| 18> 
+| 19> * xyz 0 1
+| 20> H          0.63109       -0.02651        0.47485
+| 21> O          0.14793        0.02998       -0.34219
+| 22> H         -0.77901       -0.00348       -0.13266
+| 23> *
+| 24> 
+| 25> 
+| 26> 
+| 27> 
+| 28>                          ****END OF INPUT****
+================================================================================
+
+------------------------------------------------------------------------------
+                            SYMMETRY HANDLING SETUP
+------------------------------------------------------------------------------
+
+------------------
+SYMMETRY DETECTION
+------------------
+The point group will now be determined using a tolerance of 1.0000e-04.
+Splitting atom subsets according to nuclear charge, mass and basis set.
+Splitting atom subsets according to distance from the molecule's center.
+Identifying relative distance patterns of the atoms.
+Splitting atom subsets according to atoms' relative distance patterns.
+Bring atoms of each subset into input order.
+The molecule is planar.
+There is at least one atom subset not centered around the molecule's center.
+The molecule does not have a center of inversion.
+Analyzing the first atom subset for its symmetry.
+Testing point group C2v.
+Success!
+This point group has been found:    C2v
+Largest non-degenerate subgroup:    C2v
+
+
+Mass-centered symmetry-perfected Cartesians (point group C2v):
+
+Atom          Symmetry-perfected Cartesians (x, y, z; au)
+  0       1.450905092176    0.000000000000    0.941497579691
+  1       0.000000000000    0.000000000000   -0.118636109798
+  2      -1.450905092176    0.000000000000    0.941497579691
+
+
+-----------------------------------------------
+SYMMETRY-PERFECTED CARTESIAN COORDINATES (A.U.)
+-----------------------------------------------
+Warning (ORCA_SYM): Coordinates were not cleaned so far!
+
+------------------
+SYMMETRY REDUCTION
+------------------
+ORCA supports only abelian point groups.
+It is now checked, if the determined point group is supported:
+Point Group ( C2v   ) is          ... supported
+
+(Re)building abelian point group:
+Creating Character Table          ... done
+Making direct product table       ... done
+Constructing symmetry operations  ... done
+Creating atom transfer table      ... done
+Creating asymmetric unit          ... done
+
+----------------------
+ASYMMETRIC UNIT IN C2v
+----------------------
+  #  AT     MASS              COORDS (A.U.)             BAS
+   0 H    1.0080   1.45090509   0.00000000   0.94149758   0
+   1 O   15.9990   0.00000000   0.00000000  -0.11863611   0
+
+----------------------
+SYMMETRY ADAPTED BASIS
+----------------------
+The coefficients for the symmetry adapted linear combinations (SALCS)
+of basis functions will now be computed:
+Number of basis functions         ...     7
+Preparing memory                  ... done
+Constructing Gamma(red)           ... done
+Reducing Gamma(red)               ... done
+Constructing SALCs                ... done
+Checking SALC integrity           ... nothing suspicious
+Normalizing SALCs                 ... done
+
+Storing the symmetry object:
+Symmetry file                     ... h2o-matrixes.sym.tmp
+Writing symmetry information      ... done
+
+                       ****************************
+                       * Single Point Calculation *
+                       ****************************
+
+---------------------------------
+CARTESIAN COORDINATES (ANGSTROEM)
+---------------------------------
+  H      0.767786    0.000000    0.498219
+  O      0.000000    0.000000   -0.062780
+  H     -0.767786    0.000000    0.498219
+
+----------------------------
+CARTESIAN COORDINATES (A.U.)
+----------------------------
+  NO LB      ZA    FRAG     MASS         X           Y           Z
+   0 H     1.0000    0     1.008    1.450905    0.000000    0.941498
+   1 O     8.0000    0    15.999    0.000000    0.000000   -0.118636
+   2 H     1.0000    0     1.008   -1.450905    0.000000    0.941498
+
+--------------------------------
+INTERNAL COORDINATES (ANGSTROEM)
+--------------------------------
+ H      0   0   0     0.000000000000     0.00000000     0.00000000
+ O      1   0   0     0.950888567236     0.00000000     0.00000000
+ H      2   1   0     0.950915430572   107.69099742     0.00000000
+
+---------------------------
+INTERNAL COORDINATES (A.U.)
+---------------------------
+ H      0   0   0     0.000000000000     0.00000000     0.00000000
+ O      1   0   0     1.796918975953     0.00000000     0.00000000
+ H      2   1   0     1.796969740301   107.69099742     0.00000000
+
+---------------------
+BASIS SET INFORMATION
+---------------------
+There are 2 groups of distinct atoms
+
+ Group   1 Type H   : 3s contracted to 1s pattern {3}
+ Group   2 Type O   : 6s3p contracted to 2s1p pattern {33/3}
+
+Atom   0H    basis set group =>   1
+Atom   1O    basis set group =>   2
+Atom   2H    basis set group =>   1
+------------------------------------------------------------------------------
+                           ORCA GTO INTEGRAL CALCULATION
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+                   ___                                                        
+                  /   \      - P O W E R E D   B Y -                         
+                 /     \                                                     
+                 |  |  |   _    _      __       _____    __    __             
+                 |  |  |  | |  | |    /  \     |  _  \  |  |  /  |          
+                  \  \/   | |  | |   /    \    | | | |  |  | /  /          
+                 / \  \   | |__| |  /  /\  \   | |_| |  |  |/  /          
+                |  |  |   |  __  | /  /__\  \  |    /   |      \           
+                |  |  |   | |  | | |   __   |  |    \   |  |\   \          
+                \     /   | |  | | |  |  |  |  | |\  \  |  | \   \       
+                 \___/    |_|  |_| |__|  |__|  |_| \__\ |__|  \__/        
+                                                                              
+                      - O R C A' S   B I G   F R I E N D -                    
+                                      &                                       
+                       - I N T E G R A L  F E E D E R -                       
+                                                                              
+ v1 FN, 2020, v2 2021                                                         
+------------------------------------------------------------------------------
+
+
+Reading SHARK input file h2o-matrixes.SHARKINP.tmp ... ok
+----------------------
+SHARK INTEGRAL PACKAGE
+----------------------
+
+Number of atoms                             ...      3
+Number of basis functions                   ...      7
+Number of shells                            ...      5
+Maximum angular momentum                    ...      1
+Integral batch strategy                     ... SHARK/LIBINT Hybrid
+RI-J (if used) integral strategy            ... SPLIT-RIJ (Revised 2003 algorithm where possible)
+Printlevel                                  ...      1
+Contraction scheme used                     ... SEGMENTED contraction
+Coulomb Range Separation                    ... NOT USED
+Exchange Range Separation                   ... NOT USED
+Finite Nucleus Model                        ... NOT USED
+Auxiliary Coulomb fitting basis             ... NOT available
+Auxiliary J/K fitting basis                 ... NOT available
+Auxiliary Correlation fitting basis         ... NOT available
+Auxiliary 'external' fitting basis          ... NOT available
+Integral threshold                          ...     1.000000e-10
+Primitive cut-off                           ...     1.000000e-11
+Primitive pair pre-selection threshold      ...     1.000000e-11
+
+Calculating pre-screening integrals         ... done (  0.0 sec) Dimension = 5
+Organizing shell pair data                  ... done (  0.0 sec)
+Shell pair information
+Total number of shell pairs                 ...        15
+Shell pairs after pre-screening             ...        15
+Total number of primitive shell pairs       ...       135
+Primitive shell pairs kept                  ...       135
+          la=0 lb=0:     10 shell pairs
+          la=1 lb=0:      4 shell pairs
+          la=1 lb=1:      1 shell pairs
+
+Calculating one electron integrals          ... done (  0.0 sec)
+Calculating Nuclear repulsion               ... done (  0.0 sec) ENN=      9.248616616445 Eh
+
+SHARK setup successfully completed in   0.1 seconds
+
+Maximum memory used throughout the entire GTOINT-calculation: 3.9 MB
+-------------------------------------------------------------------------------
+                                 ORCA SCF
+-------------------------------------------------------------------------------
+
+------------
+SCF SETTINGS
+------------
+Hamiltonian:
+ Ab initio Hamiltonian  Method          .... Hartree-Fock(GTOs)
+
+
+General Settings:
+ Integral files         IntName         .... h2o-matrixes
+ Hartree-Fock type      HFTyp           .... RHF
+ Total Charge           Charge          ....    0
+ Multiplicity           Mult            ....    1
+ Number of Electrons    NEL             ....   10
+ Basis Dimension        Dim             ....    7
+ Nuclear Repulsion      ENuc            ....      9.2486166164 Eh
+
+ Symmetry handling      UseSym         .... ON
+ Point group                           .... C2v
+ Used point group                      .... C2v
+ Number of irreps                      .... 4
+   Irrep   A1 has    4 symmetry adapted basis functions (ofs=   0)
+   Irrep   A2 has    0 symmetry adapted basis functions (ofs=   4)
+   Irrep   B1 has    2 symmetry adapted basis functions (ofs=   4)
+   Irrep   B2 has    1 symmetry adapted basis functions (ofs=   6)
+
+Convergence Acceleration:
+ DIIS                   CNVDIIS         .... on
+   Start iteration      DIISMaxIt       ....    12
+   Startup error        DIISStart       ....  0.200000
+   # of expansion vecs  DIISMaxEq       ....     5
+   Bias factor          DIISBfac        ....   1.050
+   Max. coefficient     DIISMaxC        ....  10.000
+ Trust-Rad. Augm. Hess. CNVTRAH         .... auto
+   Auto Start mean grad. ratio tolernc. ....  1.125000
+   Auto Start start iteration           ....    20
+   Auto Start num. interpolation iter.  ....    10
+   Max. Number of Micro iterations      ....    16
+   Max. Number of Macro iterations      .... Maxiter - #DIIS iter
+   Number of Davidson start vectors     ....     2
+   Converg. threshold I  (grad. norm)   ....   5.000e-05
+   Converg. threshold II (energy diff.) ....   1.000e-06
+   Grad. Scal. Fac. for Micro threshold ....   0.100
+   Minimum threshold for Micro iter.    ....   0.010
+   NR start threshold (gradient norm)   ....   0.001
+   Initial trust radius                 ....   0.400
+   Minimum AH scaling param. (alpha)    ....   1.000
+   Maximum AH scaling param. (alpha)    .... 1000.000
+   Orbital update algorithm             .... Taylor
+   White noise on init. David. guess    .... on
+   Maximum white noise                  ....   0.010
+   Quad. conv. algorithm                .... NR
+ SOSCF                  CNVSOSCF        .... on
+   Start iteration      SOSCFMaxIt      ....   150
+   Startup grad/error   SOSCFStart      ....  0.003300
+ Level Shifting         CNVShift        .... on
+   Level shift para.    LevelShift      ....    0.2500
+   Turn off err/grad.   ShiftErr        ....    0.0010
+ Zerner damping         CNVZerner       .... off
+ Static damping         CNVDamp         .... on
+   Fraction old density DampFac         ....    0.7000
+   Max. Damping (<1)    DampMax         ....    0.9800
+   Min. Damping (>=0)   DampMin         ....    0.0000
+   Turn off err/grad.   DampErr         ....    0.1000
+ Fernandez-Rico         CNVRico         .... off
+
+SCF Procedure:
+ Maximum # iterations   MaxIter         ....   125
+ SCF integral mode      SCFMode         .... Direct
+   Integral package                     .... SHARK and LIBINT hybrid scheme
+ Reset frequency        DirectResetFreq ....    20
+ Integral Threshold     Thresh          ....  1.000e-10 Eh
+ Primitive CutOff       TCut            ....  1.000e-11 Eh
+
+Convergence Tolerance:
+ Convergence Check Mode ConvCheckMode   .... Total+1el-Energy
+ Convergence forced     ConvForced      .... 0
+ Energy Change          TolE            ....  1.000e-06 Eh
+ 1-El. energy change                    ....  1.000e-03 Eh
+ Orbital Gradient       TolG            ....  5.000e-05
+ Orbital Rotation angle TolX            ....  5.000e-05
+ DIIS Error             TolErr          ....  1.000e-06
+
+
+Diagonalization of the overlap matrix:
+Smallest eigenvalue                        ... 3.385e-01
+Time for diagonalization                   ...    0.005 sec
+Threshold for overlap eigenvalues          ... 1.000e-08
+Number of eigenvalues below threshold      ... 0
+Time for construction of square roots      ...    0.002 sec
+Producing symmetrization matrix            ... done (   0.001 sec)
+Total time needed                          ...    0.008 sec
+
+------------------------
+ONE ELECTRON MATRIX (AU)
+------------------------
+                  0          1          2          3          4          5    
+      0      -5.096089  -1.776195  -3.779156  -1.595649  -2.088509   0.000000
+      1      -1.776195 -32.728255  -7.614542  -0.018560   0.000000   0.000000
+      2      -3.779156  -7.614542  -9.341458  -0.217795   0.000000   0.000000
+      3      -1.595649  -0.018560  -0.217795  -7.551373   0.000000   0.000000
+      4      -2.088509   0.000000   0.000000   0.000000  -7.628461   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000  -7.463078
+      6      -1.574080  -1.776195  -3.779156  -1.595649   2.088509   0.000000
+                  6    
+      0      -1.574080
+      1      -1.776195
+      2      -3.779156
+      3      -1.595649
+      4       2.088509
+      5       0.000000
+      6      -5.096089
+--------------
+OVERLAP MATRIX
+--------------
+                  0          1          2          3          4          5    
+      0       1.000000   0.054790   0.478949   0.233409   0.319445   0.000000
+      1       0.054790   1.000000   0.236704   0.000000   0.000000   0.000000
+      2       0.478949   0.236704   1.000000  -0.000000   0.000000   0.000000
+      3       0.233409   0.000000  -0.000000   1.000000   0.000000   0.000000
+      4       0.319445   0.000000   0.000000   0.000000   1.000000   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000   1.000000
+      6       0.243974   0.054790   0.478949   0.233409  -0.319445   0.000000
+                  6    
+      0       0.243974
+      1       0.054790
+      2       0.478949
+      3       0.233409
+      4      -0.319445
+      5       0.000000
+      6       1.000000
+----------------
+S**(-1/2) MATRIX
+----------------
+                  0          1          2          3          4          5    
+      0       1.214917   0.022258  -0.301852  -0.144615  -0.238811   0.000000
+      1       0.022258   1.024244  -0.143872  -0.010071  -0.000000  -0.000000
+      2      -0.301852  -0.143872   1.254060   0.110846  -0.000000  -0.000000
+      3      -0.144615  -0.010071   0.110846   1.052931  -0.000000  -0.000000
+      4      -0.238811  -0.000000  -0.000000  -0.000000   1.120585  -0.000000
+      5       0.000000  -0.000000  -0.000000  -0.000000  -0.000000   1.000000
+      6      -0.088058   0.022258  -0.301852  -0.144615   0.238811  -0.000000
+                  6    
+      0      -0.088058
+      1       0.022258
+      2      -0.301852
+      3      -0.144615
+      4       0.238811
+      5      -0.000000
+      6       1.214917
+Time for model grid setup =    0.027 sec
+
+------------------------------
+INITIAL GUESS: MODEL POTENTIAL
+------------------------------
+Loading Hartree-Fock densities                     ... done
+Calculating cut-offs                               ... done
+Initializing the effective Hamiltonian             ... done
+Setting up the integral package (SHARK)            ... done
+Starting the Coulomb interaction                   ... done (   0.0 sec)
+Reading the grid                                   ... done
+Mapping shells                                     ... done
+Starting the XC term evaluation                    ... done (   0.0 sec)
+done (   0.0 sec)
+Diagonalizing the Hamiltonian                      ... done (   0.0 sec)
+Back transforming the eigenvectors                 ... done (   0.0 sec)
+Now organizing SCF variables                       ... done
+The symmetry of the initial guess is 1-A1
+Irrep occupations for operator 0
+    A1 -    3
+    A2 -    0
+    B1 -    1
+    B2 -    1
+                      ------------------
+                      INITIAL GUESS DONE (   0.1 sec)
+                      ------------------
+----------------------
+INITIAL GUESS ORBITALS
+----------------------
+                      0         1         2         3         4         5   
+                 -18.48200  -1.02930  -0.56460  -0.41524  -0.33195   0.20741
+                   2.00000   2.00000   2.00000   2.00000   2.00000   0.00000
+                  --------  --------  --------  --------  --------  --------
+  0H   1s         0.008464  0.127679  0.342607  0.205349  0.000000 -0.829992
+  1O   1s        -0.992259 -0.243661 -0.000000  0.090197 -0.000000 -0.137051
+  1O   2s        -0.035002  0.870151 -0.000000 -0.442410 -0.000000  0.913108
+  1O   1pz       -0.004352  0.142404 -0.000000  0.847163 -0.000000  0.651841
+  1O   1px        0.000000 -0.000000  0.714079 -0.000000 -0.000000  0.000000
+  1O   1py        0.000000 -0.000000  0.000000  0.000000  1.000000 -0.000000
+  2H   1s         0.008464  0.127679 -0.342607  0.205349 -0.000000 -0.829992
+                      6   
+                   0.28858
+                   0.00000
+                  --------
+  0H   1s        -0.887988
+  1O   1s         0.000000
+  1O   2s         0.000000
+  1O   1pz        0.000000
+  1O   1px        0.927288
+  1O   1py       -0.000000
+  2H   1s         0.887988
+--------------
+SCF ITERATIONS
+--------------
+ITER       Energy         Delta-E        Max-DP      RMS-DP      [F,P]     Damp
+               ***  Starting incremental Fock matrix formation  ***
+Fock matrix for operator 0
+                  0          1          2          3          4          5    
+      0      -0.534332  -1.200149  -0.996719  -0.343358  -0.384074   0.000000
+      1      -1.200149 -19.953012  -5.108402  -0.028709   0.000000   0.000000
+      2      -0.996719  -5.108402  -2.328237  -0.152868   0.000000   0.000000
+      3      -0.343358  -0.028709  -0.152868  -0.261048   0.000000   0.000000
+      4      -0.384074   0.000000   0.000000   0.000000  -0.266393   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000  -0.253190
+      6      -0.377526  -1.200149  -0.996719  -0.343358   0.384074   0.000000
+                  6    
+      0      -0.377526
+      1      -1.200149
+      2      -0.996719
+      3      -0.343358
+      4       0.384074
+      5       0.000000
+      6      -0.534332
+AO,MO coefficient matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.006350  -0.173666  -0.430158   0.251113   0.000000  -0.808808
+      1      -0.993867   0.228685   0.000000   0.108557  -0.000000  -0.137895
+      2      -0.027807  -0.806447   0.000000  -0.545988  -0.000000   0.915778
+      3      -0.004455  -0.156800   0.000000   0.794762  -0.000000   0.711777
+      4       0.000000   0.000000  -0.617221  -0.000000  -0.000000   0.000000
+      5       0.000000   0.000000  -0.000000   0.000000   1.000000  -0.000000
+      6       0.006350  -0.173666   0.430158   0.251113  -0.000000  -0.808808
+                  6    
+      0      -0.849039
+      1      -0.000000
+      2       0.000000
+      3       0.000000
+      4       0.994389
+      5      -0.000000
+      6       0.849039
+Density matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.413266  -0.040641   0.029600   0.405020   0.501809   0.000000
+      1      -0.040641   2.104030  -0.433706   0.097352  -0.000000  -0.000000
+      2       0.029600  -0.433706   1.905301  -0.535433  -0.000000  -0.000000
+      3       0.405020   0.097352  -0.535433   1.426927  -0.000000  -0.000000
+      4       0.501809  -0.000000  -0.000000  -0.000000   0.942450  -0.000000
+      5       0.000000  -0.000000  -0.000000  -0.000000  -0.000000   2.000000
+      6      -0.137440  -0.040641   0.029600   0.405020  -0.501809  -0.000000
+                  6    
+      0      -0.137440
+      1      -0.040641
+      2       0.029600
+      3       0.405020
+      4      -0.501809
+      5      -0.000000
+      6       0.413266
+  0    -74.9022571120   0.000000000000 0.07736799  0.01837745  0.1702663 0.7000
+Fock matrix for operator 0
+                  0          1          2          3          4          5    
+      0      -0.548140  -1.203580  -1.006983  -0.347063  -0.389656   0.000000
+      1      -1.203580 -20.026350  -5.122956  -0.029036   0.000000   0.000000
+      2      -1.006983  -5.122956  -2.358696  -0.145548   0.000000   0.000000
+      3      -0.347063  -0.029036  -0.145548  -0.286060   0.000000   0.000000
+      4      -0.389656   0.000000   0.000000   0.000000  -0.282809   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000  -0.289235
+      6      -0.380709  -1.203580  -1.006983  -0.347063   0.389656   0.000000
+                  6    
+      0      -0.380709
+      1      -1.203580
+      2      -1.006983
+      3      -0.347063
+      4       0.389656
+      5       0.000000
+      6      -0.548140
+AO,MO coefficient matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.006260  -0.174008  -0.442502   0.262740   0.000000  -0.805033
+      1      -0.993932   0.229045   0.000000   0.108092  -0.000000  -0.137190
+      2      -0.027511  -0.808412   0.000000  -0.549980  -0.000000   0.911656
+      3      -0.004409  -0.147182   0.000000   0.787231  -0.000000   0.722125
+      4       0.000000   0.000000  -0.602645  -0.000000  -0.000000   0.000000
+      5       0.000000   0.000000  -0.000000   0.000000   1.000000  -0.000000
+      6       0.006260  -0.174008   0.442502   0.262740  -0.000000  -0.805033
+                  6    
+      0      -0.842671
+      1      -0.000000
+      2       0.000000
+      3       0.000000
+      4       1.003290
+      5      -0.000000
+      6       0.842671
+Density matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.466381  -0.039056   0.018317   0.422966   0.511269   0.000000
+      1      -0.039056   2.104049  -0.433955   0.101605  -0.000000  -0.000000
+      2       0.018317  -0.433955   1.907769  -0.563116  -0.000000  -0.000000
+      3       0.422966   0.101605  -0.563116   1.383698  -0.000000  -0.000000
+      4       0.511269  -0.000000  -0.000000  -0.000000   0.877623  -0.000000
+      5       0.000000  -0.000000  -0.000000  -0.000000  -0.000000   2.000000
+      6      -0.154082  -0.039056   0.018317   0.422966  -0.511269  -0.000000
+                  6    
+      0      -0.154082
+      1      -0.039056
+      2       0.018317
+      3       0.422966
+      4      -0.511269
+      5      -0.000000
+      6       0.466381
+  1    -74.9197821716  -0.017525059635 0.06482654  0.01573442  0.1260365 0.7000
+                               ***Turning on DIIS***
+Fock matrix for operator 0
+                  0          1          2          3          4          5    
+      0      -0.559546  -1.206450  -1.015465  -0.350180  -0.394178   0.000000
+      1      -1.206450 -20.088126  -5.135188  -0.029295   0.000000   0.000000
+      2      -1.015465  -5.135188  -2.384649  -0.139386   0.000000   0.000000
+      3      -0.350180  -0.029295  -0.139386  -0.306745   0.000000   0.000000
+      4      -0.394178   0.000000   0.000000   0.000000  -0.296519   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000  -0.319726
+      6      -0.383298  -1.206450  -1.015465  -0.350180   0.394178   0.000000
+                  6    
+      0      -0.383298
+      1      -1.206450
+      2      -1.015465
+      3      -0.350180
+      4       0.394178
+      5       0.000000
+      6      -0.559546
+AO,MO coefficient matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.006205  -0.170589  -0.443799   0.266145   0.000000  -0.804647
+      1      -0.993984   0.230035   0.000000   0.106295  -0.000000  -0.136562
+      2      -0.027283  -0.814496   0.000000  -0.544861  -0.000000   0.909318
+      3      -0.004386  -0.141120   0.000000   0.786838  -0.000000   0.723762
+      4       0.000000   0.000000  -0.601099  -0.000000  -0.000000   0.000000
+      5       0.000000   0.000000  -0.000000   0.000000   1.000000  -0.000000
+      6       0.006205  -0.170589   0.443799   0.266145  -0.000000  -0.804647
+                  6    
+      0      -0.841989
+      1      -0.000000
+      2       0.000000
+      3       0.000000
+      4       1.004217
+      5      -0.000000
+      6       0.841989
+Density matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.593859  -0.034238  -0.012475   0.466918   0.533534   0.000000
+      1      -0.034238   2.104437  -0.436319   0.111067  -0.000000  -0.000000
+      2      -0.012475  -0.436319   1.922043  -0.627312  -0.000000  -0.000000
+      3       0.466918   0.111067  -0.627312   1.278097  -0.000000  -0.000000
+      4       0.533534  -0.000000  -0.000000  -0.000000   0.722641  -0.000000
+      5       0.000000  -0.000000  -0.000000  -0.000000  -0.000000   2.000000
+      6      -0.193971  -0.034238  -0.012475   0.466918  -0.533534  -0.000000
+                  6    
+      0      -0.193971
+      1      -0.034238
+      2      -0.012475
+      3       0.466918
+      4      -0.533534
+      5      -0.000000
+      6       0.593859
+  2    -74.9322196711  -0.012437499462 0.15498239  0.03790994  0.0883355 0.0000
+Fock matrix for operator 0
+                  0          1          2          3          4          5    
+      0      -0.584909  -1.212898  -1.034341  -0.357300  -0.404231   0.000000
+      1      -1.212898 -20.227192  -5.162631  -0.029767   0.000000   0.000000
+      2      -1.034341  -5.162631  -2.443580  -0.125564   0.000000   0.000000
+      3      -0.357300  -0.029767  -0.125564  -0.352864   0.000000   0.000000
+      4      -0.404231   0.000000   0.000000   0.000000  -0.327148   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000  -0.388536
+      6      -0.388903  -1.212898  -1.034341  -0.357300   0.404231   0.000000
+                  6    
+      0      -0.388903
+      1      -1.212898
+      2      -1.034341
+      3      -0.357300
+      4       0.404231
+      5       0.000000
+      6      -0.584909
+AO,MO coefficient matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.006080  -0.161544  -0.442706   0.269967   0.000000  -0.805241
+      1      -0.994100   0.232450   0.000000   0.101387  -0.000000  -0.135349
+      2      -0.026769  -0.829586   0.000000  -0.528121  -0.000000   0.905561
+      3      -0.004328  -0.127785   0.000000   0.789320  -0.000000   0.723536
+      4       0.000000   0.000000  -0.602402  -0.000000  -0.000000   0.000000
+      5       0.000000   0.000000  -0.000000   0.000000   1.000000  -0.000000
+      6       0.006080  -0.161544   0.442706   0.269967  -0.000000  -0.805241
+                  6    
+      0      -0.842564
+      1      -0.000000
+      2       0.000000
+      3       0.000000
+      4       1.003436
+      5      -0.000000
+      6       0.842564
+Density matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.590009  -0.032448  -0.017447   0.467415   0.533374   0.000000
+      1      -0.032448   2.105096  -0.439542   0.109251  -0.000000  -0.000000
+      2      -0.017447  -0.439542   1.935684  -0.621465  -0.000000  -0.000000
+      3       0.467415   0.109251  -0.621465   1.278749  -0.000000  -0.000000
+      4       0.533374  -0.000000  -0.000000  -0.000000   0.725776  -0.000000
+      5       0.000000  -0.000000  -0.000000  -0.000000  -0.000000   2.000000
+      6      -0.193945  -0.032448  -0.017447   0.467415  -0.533374  -0.000000
+                  6    
+      0      -0.193945
+      1      -0.032448
+      2      -0.017447
+      3       0.467415
+      4      -0.533374
+      5      -0.000000
+      6       0.590009
+  3    -74.9419658778  -0.009746206766 0.01364008  0.00242990  0.0076580 0.0000
+Fock matrix for operator 0
+                  0          1          2          3          4          5    
+      0      -0.584086  -1.212865  -1.033790  -0.357590  -0.404024   0.000000
+      1      -1.212865 -20.226706  -5.162261  -0.029381   0.000000   0.000000
+      2      -1.033790  -5.162261  -2.444594  -0.125767   0.000000   0.000000
+      3      -0.357590  -0.029381  -0.125767  -0.352061   0.000000   0.000000
+      4      -0.404024   0.000000   0.000000   0.000000  -0.326202   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000  -0.388678
+      6      -0.388186  -1.212865  -1.033790  -0.357590   0.404024   0.000000
+                  6    
+      0      -0.388186
+      1      -1.212865
+      2      -1.033790
+      3      -0.357590
+      4       0.404024
+      5       0.000000
+      6      -0.584086
+                      *** Initiating the SOSCF procedure ***
+                           *** Shutting down DIIS ***
+                      *** Re-Reading the Fockian *** 
+                      *** Removing any level shift *** 
+ITER      Energy       Delta-E        Grad      Rot      Max-DP    RMS-DP
+AO,MO coefficient matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.006065  -0.160189  -0.442779   0.270907   0.000000  -0.805196
+      1      -0.994105   0.232707   0.000000   0.101366  -0.000000  -0.134887
+      2      -0.026744  -0.831272   0.000000  -0.528441  -0.000000   0.903827
+      3      -0.004302  -0.128252   0.000000   0.788674  -0.000000   0.724159
+      4       0.000000   0.000000  -0.602314  -0.000000  -0.000000   0.000000
+      5       0.000000   0.000000  -0.000000   0.000000   1.000000  -0.000000
+      6       0.006065  -0.160189   0.442779   0.270907  -0.000000  -0.805196
+                  6    
+      0      -0.842526
+      1      -0.000000
+      2       0.000000
+      3       0.000000
+      4       1.003489
+      5      -0.000000
+      6       0.842526
+Density matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.590283  -0.031692  -0.020320   0.468352   0.533385   0.000000
+      1      -0.031692   2.105346  -0.440845   0.108751  -0.000000  -0.000000
+      2      -0.020320  -0.440845   1.941957  -0.620081  -0.000000  -0.000000
+      3       0.468352   0.108751  -0.620081   1.276947  -0.000000  -0.000000
+      4       0.533385  -0.000000  -0.000000  -0.000000   0.725565  -0.000000
+      5       0.000000  -0.000000  -0.000000  -0.000000  -0.000000   2.000000
+      6      -0.193931  -0.031692  -0.020320   0.468352  -0.533385  -0.000000
+                  6    
+      0      -0.193931
+      1      -0.031692
+      2      -0.020320
+      3       0.468352
+      4      -0.533385
+      5      -0.000000
+      6       0.590283
+  4    -74.95722608  -0.0152601975  0.003054  0.003054  0.006274  0.001087
+               *** Restarting incremental Fock matrix formation ***
+Fock matrix for operator 0
+                  0          1          2          3          4          5    
+      0      -0.584145  -1.212891  -1.033827  -0.357659  -0.404044   0.000000
+      1      -1.212891 -20.227430  -5.162395  -0.029389   0.000000   0.000000
+      2      -1.033827  -5.162395  -2.445017  -0.125709   0.000000   0.000000
+      3      -0.357659  -0.029389  -0.125709  -0.352096   0.000000   0.000000
+      4      -0.404044   0.000000   0.000000   0.000000  -0.326396   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000  -0.389072
+      6      -0.388196  -1.212891  -1.033827  -0.357659   0.404044   0.000000
+                  6    
+      0      -0.388196
+      1      -1.212891
+      2      -1.033827
+      3      -0.357659
+      4       0.404044
+      5       0.000000
+      6      -0.584145
+AO,MO coefficient matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.006065  -0.159944  -0.442745   0.271285   0.000000  -0.805118
+      1      -0.994105   0.232748   0.000000   0.101429  -0.000000  -0.134768
+      2      -0.026743  -0.831548   0.000000  -0.528865  -0.000000   0.903325
+      3      -0.004301  -0.128473   0.000000   0.788334  -0.000000   0.724489
+      4       0.000000   0.000000  -0.602355  -0.000000  -0.000000   0.000000
+      5       0.000000   0.000000  -0.000000   0.000000   1.000000  -0.000000
+      6       0.006065  -0.159944   0.442745   0.271285  -0.000000  -0.805118
+                  6    
+      0      -0.842544
+      1      -0.000000
+      2       0.000000
+      3       0.000000
+      4       1.003464
+      5      -0.000000
+      6       0.842544
+Density matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.590475  -0.031479  -0.021269   0.468771   0.533379   0.000000
+      1      -0.031479   2.105410  -0.441196   0.108668  -0.000000  -0.000000
+      2      -0.021269  -0.441196   1.943770  -0.619952  -0.000000  -0.000000
+      3       0.468771   0.108668  -0.619952   1.275989  -0.000000  -0.000000
+      4       0.533379  -0.000000  -0.000000  -0.000000   0.725664  -0.000000
+      5       0.000000  -0.000000  -0.000000  -0.000000  -0.000000   2.000000
+      6      -0.193618  -0.031479  -0.021269   0.468771  -0.533379  -0.000000
+                  6    
+      0      -0.193618
+      1      -0.031479
+      2      -0.021269
+      3       0.468771
+      4      -0.533379
+      5      -0.000000
+      6       0.590475
+  5    -74.96055731  -0.0033312337  0.000571  0.000469  0.001812  0.000348
+Fock matrix for operator 0
+                  0          1          2          3          4          5    
+      0      -0.584090  -1.212888  -1.033778  -0.357696  -0.404029   0.000000
+      1      -1.212888 -20.227417  -5.162375  -0.029377   0.000000   0.000000
+      2      -1.033778  -5.162375  -2.445116  -0.125722   0.000000   0.000000
+      3      -0.357696  -0.029377  -0.125722  -0.351920   0.000000   0.000000
+      4      -0.404029   0.000000   0.000000   0.000000  -0.326431   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000  -0.389099
+      6      -0.388179  -1.212888  -1.033778  -0.357696   0.404029   0.000000
+                  6    
+      0      -0.388179
+      1      -1.212888
+      2      -1.033778
+      3      -0.357696
+      4       0.404029
+      5       0.000000
+      6      -0.584090
+AO,MO coefficient matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.006064  -0.159842  -0.442695   0.271545   0.000000  -0.805050
+      1      -0.994106   0.232765   0.000000   0.101472  -0.000000  -0.134705
+      2      -0.026742  -0.831663   0.000000  -0.529156  -0.000000   0.903049
+      3      -0.004300  -0.128565   0.000000   0.788101  -0.000000   0.724727
+      4       0.000000   0.000000  -0.602414  -0.000000  -0.000000   0.000000
+      5       0.000000   0.000000  -0.000000   0.000000   1.000000  -0.000000
+      6       0.006064  -0.159842   0.442695   0.271545  -0.000000  -0.805050
+                  6    
+      0      -0.842570
+      1      -0.000000
+      2       0.000000
+      3       0.000000
+      4       1.003429
+      5      -0.000000
+      6       0.842570
+Density matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.590603  -0.031359  -0.021835   0.469057   0.533372   0.000000
+      1      -0.031359   2.105444  -0.441385   0.108640  -0.000000  -0.000000
+      2      -0.021835  -0.441385   1.944768  -0.619982  -0.000000  -0.000000
+      3       0.469057   0.108640  -0.619982   1.275300  -0.000000  -0.000000
+      4       0.533372  -0.000000  -0.000000  -0.000000   0.725806  -0.000000
+      5       0.000000  -0.000000  -0.000000  -0.000000  -0.000000   2.000000
+      6      -0.193313  -0.031359  -0.021835   0.469057  -0.533372  -0.000000
+                  6    
+      0      -0.193313
+      1      -0.031359
+      2      -0.021835
+      3       0.469057
+      4      -0.533372
+      5      -0.000000
+      6       0.590603
+  6    -74.96055842  -0.0000011066  0.000211  0.000323  0.000998  0.000211
+Fock matrix for operator 0
+                  0          1          2          3          4          5    
+      0      -0.584076  -1.212890  -1.033760  -0.357722  -0.404027   0.000000
+      1      -1.212890 -20.227460  -5.162374  -0.029374   0.000000   0.000000
+      2      -1.033760  -5.162374  -2.445189  -0.125723   0.000000   0.000000
+      3      -0.357722  -0.029374  -0.125723  -0.351812   0.000000   0.000000
+      4      -0.404027   0.000000   0.000000   0.000000  -0.326496   0.000000
+      5       0.000000   0.000000   0.000000   0.000000   0.000000  -0.389138
+      6      -0.388186  -1.212890  -1.033760  -0.357722   0.404027   0.000000
+                  6    
+      0      -0.388186
+      1      -1.212890
+      2      -1.033760
+      3      -0.357722
+      4       0.404027
+      5       0.000000
+      6      -0.584076
+AO,MO coefficient matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.006064  -0.159849  -0.442679   0.271561   0.000000  -0.805043
+      1      -0.994106   0.232764   0.000000   0.101475  -0.000000  -0.134705
+      2      -0.026742  -0.831654   0.000000  -0.529174  -0.000000   0.903047
+      3      -0.004300  -0.128557   0.000000   0.788086  -0.000000   0.724744
+      4       0.000000   0.000000  -0.602434  -0.000000  -0.000000   0.000000
+      5       0.000000   0.000000  -0.000000   0.000000   1.000000  -0.000000
+      6       0.006064  -0.159849   0.442679   0.271561  -0.000000  -0.805043
+                  6    
+      0      -0.842578
+      1      -0.000000
+      2       0.000000
+      3       0.000000
+      4       1.003417
+      5      -0.000000
+      6       0.842578
+Density matrix for operator 0
+                  0          1          2          3          4          5    
+      0       0.590596  -0.031358  -0.021851   0.469074   0.533370   0.000000
+      1      -0.031358   2.105444  -0.441385   0.108645  -0.000000  -0.000000
+      2      -0.021851  -0.441385   1.944776  -0.620009  -0.000000  -0.000000
+      3       0.469074   0.108645  -0.620009   1.275251  -0.000000  -0.000000
+      4       0.533370  -0.000000  -0.000000  -0.000000   0.725854  -0.000000
+      5       0.000000  -0.000000  -0.000000  -0.000000  -0.000000   2.000000
+      6      -0.193261  -0.031358  -0.021851   0.469074  -0.533370  -0.000000
+                  6    
+      0      -0.193261
+      1      -0.031358
+      2      -0.021851
+      3       0.469074
+      4      -0.533370
+      5      -0.000000
+      6       0.590596
+                 **** Energy Check signals convergence ****
+              ***Rediagonalizing the Fockian in SOSCF/NRSCF***
+
+               *****************************************************
+               *                     SUCCESS                       *
+               *           SCF CONVERGED AFTER   7 CYCLES          *
+               *****************************************************
+
+
+----------------
+TOTAL SCF ENERGY
+----------------
+
+Total Energy       :          -74.96055860 Eh           -2039.78050 eV
+
+Components:
+Nuclear Repulsion  :            9.24861662 Eh             251.66765 eV
+Electronic Energy  :          -84.20917522 Eh           -2291.44815 eV
+One Electron Energy:         -122.48746083 Eh           -3333.05326 eV
+Two Electron Energy:           38.27828561 Eh            1041.60511 eV
+
+Virial components:
+Potential Energy   :         -149.56487658 Eh           -4069.86720 eV
+Kinetic Energy     :           74.60431798 Eh            2030.08670 eV
+Virial Ratio       :            2.00477507
+
+
+---------------
+SCF CONVERGENCE
+---------------
+
+  Last Energy change         ...   -1.8479e-07  Tolerance :   1.0000e-06
+  Last MAX-Density change    ...    5.1542e-05  Tolerance :   1.0000e-05
+  Last RMS-Density change    ...    1.2893e-05  Tolerance :   1.0000e-06
+  Last Orbital Gradient      ...    2.5115e-05  Tolerance :   5.0000e-05
+  Last Orbital Rotation      ...    1.9726e-05  Tolerance :   5.0000e-05
+
+             **** THE GBW FILE WAS UPDATED (h2o-matrixes.gbw) ****
+             **** DENSITY h2o-matrixes.scfp WAS UPDATED ****
+             **** ENERGY FILE WAS UPDATED (h2o-matrixes.en.tmp) ****
+             **** THE GBW FILE WAS UPDATED (h2o-matrixes.gbw) ****
+             **** DENSITY h2o-matrixes.scfp WAS UPDATED ****
+----------------
+ORBITAL ENERGIES
+----------------
+
+  NO   OCC          E(Eh)            E(eV)    Irrep 
+   0   2.0000     -20.236332      -550.6586    1-A1
+   1   2.0000      -1.267687       -34.4955    2-A1
+   2   2.0000      -0.626260       -17.0414    1-B1
+   3   2.0000      -0.446026       -12.1370    3-A1
+   4   2.0000      -0.389138       -10.5890    1-B2
+   5   0.0000       0.605899        16.4874    4-A1
+   6   0.0000       0.759480        20.6665    2-B1
+------------------
+MOLECULAR ORBITALS
+------------------
+                      0         1         2         3         4         5   
+                 -20.23633  -1.26769  -0.62626  -0.44603  -0.38914   0.60590
+                   2.00000   2.00000   2.00000   2.00000   2.00000   0.00000
+                  --------  --------  --------  --------  --------  --------
+  0H   1s        -0.006064 -0.159758 -0.442679  0.271614  0.000000 -0.805043
+  1O   1s         0.994106  0.232795  0.000000  0.101396 -0.000000 -0.134705
+  1O   2s         0.026739 -0.831831  0.000000 -0.528895 -0.000000  0.903047
+  1O   1pz        0.004300 -0.128293  0.000000  0.788129 -0.000000  0.724744
+  1O   1px       -0.000000  0.000000 -0.602434 -0.000000 -0.000000  0.000000
+  1O   1py       -0.000000  0.000000 -0.000000  0.000000  1.000000 -0.000000
+  2H   1s        -0.006064 -0.159758  0.442679  0.271614 -0.000000 -0.805043
+                      6   
+                   0.75948
+                   0.00000
+                  --------
+  0H   1s        -0.842578
+  1O   1s        -0.000000
+  1O   2s         0.000000
+  1O   1pz        0.000000
+  1O   1px        1.003417
+  1O   1py       -0.000000
+  2H   1s         0.842578
+
+
+-------
+DENSITY
+-------
+                  0          1          2          3          4          5    
+      0       0.590596  -0.031358  -0.021851   0.469074   0.533370   0.000000
+      1      -0.031358   2.105444  -0.441385   0.108645  -0.000000  -0.000000
+      2      -0.021851  -0.441385   1.944776  -0.620009  -0.000000  -0.000000
+      3       0.469074   0.108645  -0.620009   1.275251  -0.000000  -0.000000
+      4       0.533370  -0.000000  -0.000000  -0.000000   0.725854  -0.000000
+      5       0.000000  -0.000000  -0.000000  -0.000000  -0.000000   2.000000
+      6      -0.193261  -0.031358  -0.021851   0.469074  -0.533370  -0.000000
+                  6    
+      0      -0.193261
+      1      -0.031358
+      2      -0.021851
+      3       0.469074
+      4      -0.533370
+      5      -0.000000
+      6       0.590596
+
+
+
+                    ********************************
+                    * MULLIKEN POPULATION ANALYSIS *
+                    ********************************
+
+-----------------------
+MULLIKEN ATOMIC CHARGES
+-----------------------
+   0 H :    0.188869
+   1 O :   -0.377739
+   2 H :    0.188869
+Sum of atomic charges:    0.0000000
+
+--------------------------------
+MULLIKEN REDUCED ORBITAL CHARGES
+--------------------------------
+  0 H s       :     0.811131  s :     0.811131
+  1 O s       :     3.816897  s :     3.816897
+      pz      :     1.494223  p :     4.560841
+      px      :     1.066618
+      py      :     2.000000
+  2 H s       :     0.811131  s :     0.811131
+
+
+                     *******************************
+                     * LOEWDIN POPULATION ANALYSIS *
+                     *******************************
+
+----------------------
+LOEWDIN ATOMIC CHARGES
+----------------------
+   0 H :    0.130432
+   1 O :   -0.260865
+   2 H :    0.130432
+
+-------------------------------
+LOEWDIN REDUCED ORBITAL CHARGES
+-------------------------------
+  0 H s       :     0.869568  s :     0.869568
+  1 O s       :     3.657667  s :     3.657667
+      pz      :     1.507283  p :     4.603198
+      px      :     1.095915
+      py      :     2.000000
+  2 H s       :     0.869568  s :     0.869568
+
+
+                      *****************************
+                      * MAYER POPULATION ANALYSIS *
+                      *****************************
+
+  NA   - Mulliken gross atomic population
+  ZA   - Total nuclear charge
+  QA   - Mulliken gross atomic charge
+  VA   - Mayer's total valence
+  BVA  - Mayer's bonded valence
+  FA   - Mayer's free valence
+
+  ATOM       NA         ZA         QA         VA         BVA        FA
+  0 H      0.8111     1.0000     0.1889     0.9643     0.9643     0.0000
+  1 O      8.3777     8.0000    -0.3777     1.8988     1.8988    -0.0000
+  2 H      0.8111     1.0000     0.1889     0.9643     0.9643     0.0000
+
+  Mayer bond orders larger than 0.100000
+B(  0-H ,  1-O ) :   0.9494 B(  1-O ,  2-H ) :   0.9494 
+
+-------
+TIMINGS
+-------
+
+Total SCF time: 0 days 0 hours 0 min 1 sec 
+
+Total time                  ....       1.149 sec
+Sum of individual times     ....       0.621 sec  ( 54.0%)
+
+Fock matrix formation       ....       0.358 sec  ( 31.2%)
+Diagonalization             ....       0.002 sec  (  0.2%)
+Density matrix formation    ....       0.002 sec  (  0.2%)
+Population analysis         ....       0.041 sec  (  3.6%)
+Initial guess               ....       0.043 sec  (  3.7%)
+Orbital Transformation      ....       0.000 sec  (  0.0%)
+Orbital Orthonormalization  ....       0.000 sec  (  0.0%)
+DIIS solution               ....       0.111 sec  (  9.7%)
+SOSCF solution              ....       0.037 sec  (  3.2%)
+
+Maximum memory used throughout the entire SCF-calculation: 223.5 MB
+
+-------------------------   --------------------
+FINAL SINGLE POINT ENERGY       -74.960558600333
+-------------------------   --------------------
+
+
+                            ***************************************
+                            *     ORCA property calculations      *
+                            ***************************************
+
+                                    ---------------------
+                                    Active property flags
+                                    ---------------------
+   (+) Dipole Moment
+
+
+------------------------------------------------------------------------------
+                       ORCA ELECTRIC PROPERTIES CALCULATION
+------------------------------------------------------------------------------
+
+Dipole Moment Calculation                       ... on
+Quadrupole Moment Calculation                   ... off
+Polarizability Calculation                      ... off
+GBWName                                         ... h2o-matrixes.gbw
+Electron density                                ... h2o-matrixes.scfp
+The origin for moment calculation is the CENTER OF MASS  = ( 0.000000,  0.000000  0.000000)
+
+-------------
+DIPOLE MOMENT
+-------------
+                                X             Y             Z
+Electronic contribution:      0.00000       0.00000      -0.26017
+Nuclear contribution   :      0.00000       0.00000       0.93391
+                        -----------------------------------------
+Total Dipole Moment    :      0.00000       0.00000       0.67373
+                        -----------------------------------------
+Magnitude (a.u.)       :      0.67373
+Magnitude (Debye)      :      1.71249
+
+
+
+--------------------
+Rotational spectrum 
+--------------------
+ 
+Rotational constants in cm-1:    29.917429    14.184894     9.622522 
+Rotational constants in MHz : 896901.954974 425252.430691 288475.945456 
+
+ Dipole components along the rotational axes: 
+x,y,z [a.u.] :     0.000000     0.673733     0.000000 
+x,y,z [Debye]:     0.000000     1.712492     0.000000 
+
+ 
+
+Timings for individual modules:
+
+Sum of individual times         ...        1.883 sec (=   0.031 min)
+GTO integral calculation        ...        0.441 sec (=   0.007 min)  23.4 %
+SCF iterations                  ...        1.442 sec (=   0.024 min)  76.6 %
+                             ****ORCA TERMINATED NORMALLY****
+TOTAL RUN TIME: 0 days 0 hours 0 minutes 2 seconds 412 msec
