@@ -1,0 +1,12 @@
+! PAL2
+! Opt Freq B3LYP Def2-TZVP Def2/J DefGrid2
+! TightSCF
+! LargePrint
+
+%MaxCore 1000
+
+* xyz 0 1
+O    0.0000   -0.7920    0.7920
+H    0.0000    0.0000    0.0000
+H    0.0626   -0.4973   -0.4973
+*
